@@ -1,13 +1,26 @@
+using Aplicacao.Servicos._Pessoa;
+using Dominio.Interfaces;
+using Dominio.Interfaces.Generico;
+using Infraestrutura.Context;
+using Infraestrutura.Repositorios;
+using Infraestrutura.Repositorios.Generico;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<Contexto>(options =>
+{
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddScoped(typeof(IGenerico<>), typeof(RepositorioGenerico<>));
+builder.Services.AddScoped<IPessoa, RepositorioPessoa>();
+builder.Services.AddScoped<ServicoPessoa>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(sg =>
 {
