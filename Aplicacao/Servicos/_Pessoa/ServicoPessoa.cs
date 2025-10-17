@@ -2,57 +2,63 @@
 using Aplicacao.Interfaces.Genericos;
 using Aplicacao.Mapeadores;
 using Dominio.Interfaces;
+using Dominio.Sinais;
+using Dominio.Sinais.Compartilhado;
+using Dominio.Sinais.Interfaces;
 
 namespace Aplicacao.Servicos._Pessoa
 {
-    public class ServicoPessoa : IGenericoAplicacao<PessoaDto>
-    {
-        private readonly IPessoa _repositorioPessoa;
-
-        public ServicoPessoa(IPessoa repositorioPessoa)
+	public class ServicoPessoa : IGenericoAplicacao<PessoaDto>
+	{
+		private readonly IPessoa _repositorioPessoa;
+		private readonly IDespachadorDeSinais _despachador;
+        public ServicoPessoa(IPessoa repositorioPessoa, IDespachadorDeSinais despachador)
         {
             _repositorioPessoa = repositorioPessoa;
+            _despachador = despachador;
         }
 
         public async Task<PessoaDto> Adicionar(PessoaDto objeto)
-        {
-            var pessoa = MapeadorDaPessoa.ParaEntidade(objeto);
+		{
+			var pessoa = MapeadorDaPessoa.ParaEntidade(objeto);
 
-            var pessoaCriada = await _repositorioPessoa.Adicionar(pessoa);
+			var pessoaCriada = await _repositorioPessoa.Adicionar(pessoa);
 
-            return MapeadorDaPessoa.ParaDto(pessoaCriada);
-        }
+			await _despachador.PublicarAsync(new PessoaCriadaSinal(pessoaCriada));
 
-        public async Task<PessoaDto> Atualizar(PessoaDto objeto)
-        {
-            var pessoa = MapeadorDaPessoa.ParaEntidade(objeto);
+			return MapeadorDaPessoa.ParaDto(pessoaCriada);
+		}
 
-            await _repositorioPessoa.Atualizar(pessoa);
+		public async Task<PessoaDto> Atualizar(PessoaDto objeto)
+		{
+			var pessoa = MapeadorDaPessoa.ParaEntidade(objeto);
 
-            return MapeadorDaPessoa.ParaDto(pessoa);
-        }
+			await _repositorioPessoa.Atualizar(pessoa);
 
-        public async Task<PessoaDto> BuscarPorId(int id)
-        {
-            var pessoa = await _repositorioPessoa.BuscarPorId(id);
+			return MapeadorDaPessoa.ParaDto(pessoa);
+		}
 
-            return MapeadorDaPessoa.ParaDto(pessoa);
-        }
+		public async Task<PessoaDto> BuscarPorId(int id)
+		{
+			var pessoa = await _repositorioPessoa.BuscarPorId(id);
 
-        public async Task<PessoaDto> Excluir(PessoaDto objeto)
-        {
-            var pessoa = MapeadorDaPessoa.ParaEntidade(objeto);
+			return MapeadorDaPessoa.ParaDto(pessoa);
+		}
 
-            await _repositorioPessoa.Excluir(pessoa);
+		public async Task<PessoaDto> Excluir(PessoaDto objeto)
+		{
+			var pessoa = MapeadorDaPessoa.ParaEntidade(objeto);
 
-            return MapeadorDaPessoa.ParaDto(pessoa);
-        }
+			await _repositorioPessoa.Excluir(pessoa);
 
-        public async Task<IList<PessoaDto>> Listar()
-        {
-            var pessoas = await _repositorioPessoa.Listar();
+			return MapeadorDaPessoa.ParaDto(pessoa);
+		}
 
-            return MapeadorDaPessoa.ParaListaDeDtos(pessoas).ToList();
-        }
-    }
+		public async Task<IList<PessoaDto>> Listar()
+		{
+			var pessoas = await _repositorioPessoa.Listar();
+
+			return MapeadorDaPessoa.ParaListaDeDtos(pessoas).ToList();
+		}
+	}
 }
