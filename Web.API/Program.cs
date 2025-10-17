@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<Contexto>(options =>
 {
-	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 builder.Services.AddScoped(typeof(IGenerico<>), typeof(RepositorioGenerico<>));
@@ -27,19 +27,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(sg =>
 {
-	sg.SwaggerDoc("v1", new OpenApiInfo { Title = "Lista de Aniversariantes", Version = "v1" });
+    sg.SwaggerDoc("v1", new OpenApiInfo { Title = "Lista de Aniversariantes", Version = "v1" });
 });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI(c =>
-	{
-		c.DefaultModelsExpandDepth(0);
-		c.DocExpansion(DocExpansion.None);
-	});
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.DefaultModelsExpandDepth(0);
+        c.DocExpansion(DocExpansion.None);
+    });
 }
 
 app.UseAuthorization();

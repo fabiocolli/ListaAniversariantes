@@ -5,10 +5,10 @@ using Infraestrutura.Repositorios.Generico;
 
 namespace Infraestrutura.Repositorios
 {
-	public class RepositorioPessoa : RepositorioGenerico<Pessoa>, IPessoa
-	{
-		public RepositorioPessoa(Contexto contexto) : base(contexto)
-		{
-		}
-	}
+    public class RepositorioPessoa : RepositorioGenerico<Pessoa>, IPessoa
+    {
+        public RepositorioPessoa(Contexto contexto) : base(contexto)
+        {
+        }
+    }
 }

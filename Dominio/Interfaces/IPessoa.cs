@@ -3,7 +3,7 @@ using Dominio.Interfaces.Generico;
 
 namespace Dominio.Interfaces
 {
-	public interface IPessoa : IGenerico<Pessoa>
-	{
-	}
+    public interface IPessoa : IGenerico<Pessoa>
+    {
+    }
 }

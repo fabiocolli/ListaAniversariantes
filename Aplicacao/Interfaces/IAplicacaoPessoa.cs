@@ -4,6 +4,6 @@ using Aplicacao.Interfaces.Genericos;
 namespace Aplicacao.Interfaces
 {
     public interface IAplicacaoPessoa : IGenericoAplicacao<PessoaDto>
-	{
+    {
     }
 }
