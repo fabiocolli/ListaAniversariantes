@@ -1,21 +1,22 @@
 ﻿using Aplicacao.Dtos.Pessoas;
+using Aplicacao.Interfaces;
 using Dominio.Entidades;
 
 namespace Aplicacao.Mapeadores
 {
-	public static class MapeadorDaPessoa
+	public class MapeadorDaPessoa : IMapeadorBase<PessoaDto, Pessoa>
 	{
-		public static PessoaDto ParaDto(Pessoa pessoa)
+		public static PessoaDto ParaDto(Pessoa entidade)
 		{
-			if (pessoa == null)
+			if (entidade == null)
 				return null;
 
 			return new PessoaDto
 			{
-				IdPessoa = pessoa.IdPessoa,
-				Nome = pessoa.Nome,
-				DataNascimento = pessoa.DataNascimento,
-				Idade = CalcularIdade(pessoa.DataNascimento)
+				IdPessoa = entidade.IdPessoa,
+				Nome = entidade.Nome,
+				DataNascimento = entidade.DataNascimento,
+				Idade = CalcularIdade(entidade.DataNascimento)
 			};
 		}
 
@@ -26,6 +27,7 @@ namespace Aplicacao.Mapeadores
 
 			return new Pessoa
 			{
+				IdPessoa = dto.IdPessoa,
 				Nome = dto.Nome,
 				DataNascimento = dto.DataNascimento
 			};
@@ -44,9 +46,9 @@ namespace Aplicacao.Mapeadores
 			};
 		}
 
-		public static IEnumerable<PessoaDto> ParaListaDeDtos(IEnumerable<Pessoa> pessoas)
+		public static IEnumerable<PessoaDto> ParaListaDeDtos(IEnumerable<Pessoa> entidades)
 		{
-			return pessoas?.Select(ParaDto) ?? Enumerable.Empty<PessoaDto>();
+			return entidades?.Select(ParaDto) ?? Enumerable.Empty<PessoaDto>();
 		}
 
 		private static int CalcularIdade(DateTime dataNascimento)
