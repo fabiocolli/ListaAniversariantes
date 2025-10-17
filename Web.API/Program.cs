@@ -1,3 +1,4 @@
+using Aplicacao.Servicos._AmigoAniversariante;
 using Aplicacao.Servicos._Pessoa;
 using Dominio.Interfaces;
 using Dominio.Interfaces.Generico;
@@ -17,7 +18,9 @@ builder.Services.AddDbContext<Contexto>(options =>
 
 builder.Services.AddScoped(typeof(IGenerico<>), typeof(RepositorioGenerico<>));
 builder.Services.AddScoped<IPessoa, RepositorioPessoa>();
+builder.Services.AddScoped<IAmigoAniversariante, RepositorioAmigoAniversariante>();
 builder.Services.AddScoped<ServicoPessoa>();
+builder.Services.AddScoped<ServicoAmigoAniversariante>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

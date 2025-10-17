@@ -19,7 +19,6 @@ namespace Web.API.Controllers._Pessoa
 		}
 
 		[Produces("application/json")]
-		//[HttpPost("AdicionarPessoa")]
 		[HttpGet("ListarTodasPessoas")]
 		public async Task<ActionResult<IEnumerable<RespostaPessoa>>> ListarTodasPessoas()
 		{
