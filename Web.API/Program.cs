@@ -1,3 +1,4 @@
+using Aplicacao.Configuracoes;
 using Aplicacao.ManipuladoresDeSinal;
 using Aplicacao.Servicos._AmigoAniversariante;
 using Aplicacao.Servicos._Pessoa;
@@ -35,7 +36,11 @@ builder.Services.AddSwaggerGen(sg =>
 {
 	sg.SwaggerDoc("v1", new OpenApiInfo { Title = "Lista de Aniversariantes", Version = "v1" });
 });
+
 var app = builder.Build();
+
+//RegistraManipuladoresDeSinal.RegistrarManipuladores(app.Services);
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

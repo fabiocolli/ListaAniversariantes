@@ -1,6 +1,5 @@
 ﻿using Dominio.Entidades;
 using Dominio.Sinais.Interfaces;
-using MediatR;
 
 namespace Dominio.Sinais
 {
