@@ -1,4 +1,3 @@
-using Aplicacao.Configuracoes;
 using Aplicacao.ManipuladoresDeSinal;
 using Aplicacao.Servicos._AmigoAniversariante;
 using Aplicacao.Servicos._Pessoa;

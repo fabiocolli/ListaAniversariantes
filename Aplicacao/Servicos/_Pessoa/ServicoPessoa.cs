@@ -1,14 +1,13 @@
 ﻿using Aplicacao.Dtos.Pessoas;
-using Aplicacao.Interfaces.Genericos;
+using Aplicacao.Interfaces;
 using Aplicacao.Mapeadores;
 using Dominio.Interfaces;
 using Dominio.Sinais;
-using Dominio.Sinais.Compartilhado;
 using Dominio.Sinais.Interfaces;
 
 namespace Aplicacao.Servicos._Pessoa
 {
-	public class ServicoPessoa : IGenericoAplicacao<PessoaDto>
+	public class ServicoPessoa : IAplicacaoPessoa
 	{
 		private readonly IPessoa _repositorioPessoa;
 		private readonly IDespachadorDeSinais _despachador;
