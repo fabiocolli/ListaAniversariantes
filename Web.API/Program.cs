@@ -10,7 +10,7 @@ using Infraestrutura.Context;
 using Infraestrutura.Repositorios;
 using Infraestrutura.Repositorios.Generico;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
