@@ -26,7 +26,7 @@ namespace Infraestrutura.Context
         {
             return "Data Source=fc-p\\local;Initial Catalog=ListaAniversariante;" +
                 "Persist Security Info=True;User " +
-                "ID=sa;Password=qM1t$up|iC74;TrustServerCertificate=True";
+                "ID=sa;Password=;TrustServerCertificate=True";
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
